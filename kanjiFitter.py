@@ -22,12 +22,17 @@ print(essay2)
 print(len(essay2[0]))
 blocksLeft = totalLength
 totalRows = row
+pointer = 0
 for paragraph in essay2:
     rows = ceil(len(paragraph)/col)
     nullBlocks = col - len(paragraph)%col
+    for char in paragraph:
+        if (char == "、" or char == "。") and ((paragraph.index(char,pointer) % col) == 0):
+            nullBlocks+=1
+            pointer = paragraph.index(char,pointer)
     blocksLeft -= nullBlocks
     totalRows -= rows
-    print('Paragraph ', essay2.index(paragraph),': ', len(paragraph), ' blocks\n ', rows, ' rows\n ', nullBlocks, 'empty blocks\n ', totalRows, ' rows left\n ')
+    print('Paragraph ', essay2.index(paragraph) + 1,': ', len(paragraph), ' blocks\n ', rows, ' rows\n ', nullBlocks, 'empty blocks\n ', totalRows, ' rows left\n ')
     
     
 
